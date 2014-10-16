@@ -18,7 +18,15 @@ public class JInjector {
     private final Map<Class<?>, Provider<?>> providers = new HashMap<>();
     
     public <T> T get(Class<T> type) {
-        return getProvider(type).get();
+        T res = (T) instances.get(type);
+        if (res == null) {
+            Provider<T> provider = (Provider<T>) providers.get(type);
+            if (provider == null) {
+                throw new IllegalArgumentException("Can't find bind for type: " + type.getName());
+            }
+            res = provider.get();
+        }
+        return res;
     }
     
     public <T> Provider<T> getProvider(final Class<T> type) {
@@ -28,11 +36,11 @@ public class JInjector {
             public T get() {
                 T res = (T) instances.get(type);
                 if (res == null) {
-                    Provider<?> provider = providers.get(type);
+                    Provider<T> provider = (Provider<T>) providers.get(type);
                     if (provider == null) {
-                        return null;
+                        throw new IllegalArgumentException("Can't find bind for type: " + type.getName());
                     }
-                    res = (T) provider.get();
+                    res = provider.get();
                 }
                 return res;
             }
@@ -46,6 +54,7 @@ public class JInjector {
         if (instance == null) {
             throw new NullPointerException("The 'instance' parameter can not be null.");
         }
+        providers.remove(type);
         instances.put(type, instance);
     }
     
@@ -56,6 +65,7 @@ public class JInjector {
         if (provider == null) {
             throw new NullPointerException("The 'provider' parameter can not be null.");
         }
+        instances.remove(type);
         providers.put(type, provider);
     }
     
