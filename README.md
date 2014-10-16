@@ -3,13 +3,13 @@ JInjector
 
 JInjector is a very simple manual injector for Java and GWT applications.
 
-=Creating the JInjector instance
+# Creating the JInjector instance
 
 First you need an instance of the injector. You can get one simply instantiating the JInjector class.
 
     JInjector myInjector = new JInjector();
     
-=Registering instances
+# Registering instances
     
 At some point when you application starts up you need to register your instances
 
@@ -33,7 +33,7 @@ You can also register providers like this:
     
 This kind of registration can be used when you want to return a new instance on every get call, or if you want to return different instances based on some conditions.
 
-=Getting instances
+# Getting instances
 
 After you registered all the services and instances you need, you can get back like this:
 
