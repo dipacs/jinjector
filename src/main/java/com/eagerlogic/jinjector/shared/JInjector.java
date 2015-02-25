@@ -15,6 +15,7 @@ import java.util.Map;
 public class JInjector {
 
 	private static final Map<String, JInjector> namedInjectors = new HashMap<>();
+	private static final Map<String, JInjector> packageInjectors = new HashMap<>();
 
 	public static JInjector createNamed(String name) {
 		if (name == null) {
@@ -35,6 +36,19 @@ public class JInjector {
 			throw new IllegalArgumentException("Can't find injector with name: " + name);
 		}
 		return res;
+	}
+
+	public static JInjector createPackageInjector(String packageName) {
+		if (packageName == null) {
+			throw new NullPointerException("The 'name' parameter can not be null.");
+		}
+		if (packageInjectors.containsKey(packageName)) {
+			throw new IllegalArgumentException("A named injector with this name already exists.");
+		}
+
+		JInjector injector = new JInjector();
+		packageInjectors.put(packageName, injector);
+		return injector;
 	}
 
 	public static JInjector getPackageInjector() {
