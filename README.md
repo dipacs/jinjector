@@ -16,18 +16,18 @@ You can create named injectors using the static JInjector.createNamed(...) metho
     
 After this you can get this named injector instance from anywhere in your code like this:
 
-    JInjector myInjector = JInjector.GetInjector("MyInjector");
+    JInjector myInjector = JInjector.getInjector("MyInjector");
     
 ## Package injectors
-Using named injectors you can also create package injectors. Assume that your code is in the package: org.myproject. You can register a named injector for this packaged like this:
+Using JInjector.createPackageInjector() method you can also create package injectors. Assume that your code is in the package: org.myproject. You can register a package injector for this packaged like this:
 
-    JInjector pkgInjector = JInjector.createNamed("org.myproject");
+    JInjector pkgInjector = JInjector.createPackageInjector("org.myproject");
     
-After this you can access this injector instance from any class which is under the org.myproject package or in one of it's sub package. Assume thet you have a class: MyClass in package: org.myproject.utils. You can access the previously registered injector like this:
+After this you can access this injector instance from any class which is under the org.myproject package or in one of it's sub package. Assume that you have a class: MyClass in package: org.myproject.utils. You can access the previously registered injector like this:
 
     JInjector pkgInjector = JInjector.getPackageInjector();
     
-You can also register an injector with name: "org". In this case this injector will be available calling the JInjector.getPackageInjector() under any class which is in the org pkg or in one of it's subpackage except classes in org.myproject package or in one of its subpackage because we registered a different injector for this package. Th JInjector.getPackageInjector() method is always returns the injector which matches the caller class's packages longest. 
+You can also register an injector with package: "org". In this case this injector will be available calling the JInjector.getPackageInjector() under any class which is in the org pkg or in one of it's subpackage except classes in org.myproject package or in one of its subpackage because we registered a different injector for this package. The JInjector.getPackageInjector() method is always returns the injector which matches the caller class's packages longest. 
     
 # Registering instances
     
