@@ -67,16 +67,16 @@ public class JInjectorTest {
 
 	@Test
 	public void testGetPackageInjector() {
-		JInjector l1Injector = JInjector.createNamed("com");
+		JInjector l1Injector = JInjector.createPackageInjector("com");
 		assertTrue(l1Injector == JInjector.getPackageInjector());
 
-		JInjector l2Injector = JInjector.createNamed("com.eagerlogic");
+		JInjector l2Injector = JInjector.createPackageInjector("com.eagerlogic");
 		assertTrue(l2Injector == JInjector.getPackageInjector());
 
-		JInjector l3Injector = JInjector.createNamed("com.eagerlogic.jinjector");
+		JInjector l3Injector = JInjector.createPackageInjector("com.eagerlogic.jinjector");
 		assertTrue(l3Injector == JInjector.getPackageInjector());
 
-		JInjector l4Injector = JInjector.createNamed("com.eagerlogic.jinjector.shared");
+		JInjector l4Injector = JInjector.createPackageInjector("com.eagerlogic.jinjector.shared");
 		assertTrue(l4Injector == JInjector.getPackageInjector());
 	}
 

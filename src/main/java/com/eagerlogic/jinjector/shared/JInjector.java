@@ -53,13 +53,13 @@ public class JInjector {
 
 	public static JInjector getPackageInjector() {
 		StackTraceElement[] st = Thread.currentThread().getStackTrace();
-		StackTraceElement prevElement = st[1];
+		StackTraceElement prevElement = st[2];
 		String className = prevElement.getClassName();
 		String pkgName = className.substring(0, className.lastIndexOf("."));
 		int dotIndex;
 		while ((dotIndex = className.lastIndexOf(".")) > -1) {
 			className = className.substring(0, dotIndex);
-			JInjector res = namedInjectors.get(className);
+			JInjector res = packageInjectors.get(className);
 			if (res != null) {
 				return res;
 			}
